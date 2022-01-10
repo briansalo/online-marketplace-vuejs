@@ -7,6 +7,10 @@ window.axios = require('axios');
 
 import Vue from 'vue'
 //import  App from './components/ExampleComponent.vue'
+import VueChatScroll from 'vue-chat-scroll'
+Vue.use(VueChatScroll)
+
+
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default)
 Vue.component('feature-image', require('./components/FeatureImage.vue').default)
@@ -17,6 +21,10 @@ Vue.component('update-category-dropdown', require('./components/UpdateCategoryDr
 
 Vue.component('address-dropdown', require('./components/AddressDropdown.vue').default)
 Vue.component('update-address-dropdown', require('./components/UpdateAddressDropdown.vue').default)
+
+Vue.component('message', require('./components/Message.vue').default)
+Vue.component('conversation', require('./components/Conversation.vue').default)
+
 const app = new Vue({
 	el: '#app',
 	//component:{App}

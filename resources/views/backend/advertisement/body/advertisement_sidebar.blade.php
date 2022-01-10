@@ -9,6 +9,6 @@
 					<a href="">Profile</a>
 					<a href="{{route('ads.create')}}" class="{{request()->is('ads/ads/create')?'active':''}}">Create ads</a>
 					<a href="{{route('ads.index')}}" class="{{request()->is('ads/ads/index')?'active':''}}">Published ads</a>
-					<a href="">Message</a>
+					<a href="{{route('message.view')}}" class="{{request()->is('message/view')?'active':''}}">Message</a>
 				</div>	
 			</div>	

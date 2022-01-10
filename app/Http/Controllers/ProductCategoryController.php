@@ -77,7 +77,7 @@ class ProductCategoryController extends Controller
     public function ShowProductInfo($id, $slug){
       
         $advertisement = Advertisement::where('id', $id)->where('slug', $slug)->first();
-       // dd($advertisement);
+        //dd($advertisement->user_id);
         return view('products.product_info',compact('advertisement'));
 
 
