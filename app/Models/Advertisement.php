@@ -11,6 +11,7 @@ use App\Models\Subcategory;
 use App\Models\Province;
 use App\Models\City;
 use App\Models\Barangay;
+use App\Models\User;
 
 use Cohensive\OEmbed\Facades\OEmbed;
 
@@ -18,6 +19,10 @@ class Advertisement extends Model
 {
     use HasFactory;
     protected $guarded=[];
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 
     public function childcategory(){
         return $this->hasOne(Childcategory::class,'id','childcategory_id'); 
@@ -39,6 +44,7 @@ class Advertisement extends Model
         return $this->belongsTo(Barangay::class);
     }
 
+    //this is for embed package
     public function videolink(){
 
         $embed = OEmbed::get($this->link);

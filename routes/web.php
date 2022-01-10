@@ -11,6 +11,7 @@ use App\Http\Controllers\MenuCategoryController;
 use App\Http\Controllers\AdvertisementController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductCategoryController;
+use App\Http\Controllers\MessageController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -120,3 +121,23 @@ Route::prefix('product')->group(function(){
 
  
 }); 
+
+Route::prefix('message')->group(function(){
+
+    Route::post('/send',[MessageController::class, 'MessageSend'])->name('message.send');
+
+    Route::get('/view',[MessageController::class, 'MessageView'])->name('message.view');
+
+    Route::get('/chat_with_user',[MessageController::class, 'ChatWithUser'])->name('chat.with.user');
+
+    Route::get('/show_message/users/{id}',[MessageController::class, 'ShowMessage'])->name('show.message');
+
+    Route::post('/start_conversation',[MessageController::class, 'StartConversation'])->name('start.conversation');
+
+    Route::get('/set_as_read_message/{id}',[MessageController::class, 'SetAsReadMessage'])->name('set.as.read.message');
+
+}); 
+
+
+
+ 

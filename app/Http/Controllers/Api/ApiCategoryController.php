@@ -33,8 +33,8 @@ class ApiCategoryController extends Controller
 
 
     public function getAllCategory(Request $request){
-        $updatesubcategory =Category::all();
-        return response()->json($updatesubcategory);
+        $updatecategory =Category::all();
+        return response()->json($updatecategory);
 
     }
 

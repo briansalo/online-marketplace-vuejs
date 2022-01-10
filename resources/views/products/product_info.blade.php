@@ -53,13 +53,26 @@
 			</div>
 		</div><!--col-md-6-->
 
+
 		<div class="col-md-6">
 			<h1>{{$advertisement->name}}</h1>
 			<p>Price: {{$advertisement->price}}, {{$advertisement->price_status}}</p>
 			<p>Posted: {{$advertisement->created_at->diffforHumans()}}</p>
 			<hr>
 			<img src="/user_image/image1.jpg" width="120">
-			<p>Seller Name</p>
+			<p>{{$advertisement->user->name}}
+				<span>
+					@if(Auth()->check()&& $advertisement->user_id!=auth()->user()->id)
+					
+					<message
+					seller-name="{{$advertisement->user->name}}"
+					:user-id="{{auth()->user()->id}}"
+					:receiver-id="{{$advertisement->user_id}}"
+					:advertisement-id="{{$advertisement->id}}"
+					/>
+					@endif
+				</span>	
+			</p>
 
 		</div>
 @endsection
