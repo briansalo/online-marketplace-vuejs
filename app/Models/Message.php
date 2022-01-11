@@ -12,7 +12,7 @@ class Message extends Model
 
     protected $guarded=[];
     protected $appends=['chatBelongToAuth'];
-
+    //basicall the one uses of this is you can add a column in table without adding in database table. its just an secondary table
     // to avoid error in protected appends you need to create a function with the first word is get followed by the append name then the attribute word.
     //you can see the value of this attribue when you return a value from messenger model in your controller
     //its only use in javascript. because you can't see this if you die dump

@@ -22,9 +22,11 @@
         <div class="card">
             <div class="card-header text-center">
                 <div v-for="(user,index) in users" :key="index">
+                    <!--if user has profile pic-->
                     <span v-if="user.id == chatuser && user.avatar ">
                         <img :src="'/storage/'+ (user.avatar).substring(7)" width="60">{{user.name}}
                     </span>
+                    <!--else-->
                     <span v-if="user.id == chatuser && !user.avatar ">
                         <i class="fas fa-user-circle fa-lg"></i>{{user.name}}
                     </span>
@@ -141,20 +143,18 @@ export default{
                        break;
                        }
             }
-            //return response()->json(['result'=>result, 'unread'=>"unread"]);
             return result
         },
     }, //end computed  
     
     mounted(){
             axios.get('/message/chat_with_user').then((response)=>{
-            this.users = response.data.users
+            this.users = response.data
         })
             //1000 means every 1 seconds. every 1 second the showmessage method will load.
             setInterval(() => {
                 if(this.selectedUserId != ''){
                     this.showMessage(this.selectedUserId)
-                    console.log(this.chatuser)
                 }
             }, 1000);
 
