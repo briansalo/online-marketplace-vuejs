@@ -13,27 +13,23 @@ use Illuminate\Support\Facades\Auth;
 class MessageController extends Controller
 {
     public function MessageSend(Request $request){
-   //dd($request->all());
-       // Advertisement::find($request->receiverId);
-        //$message = new Message();
-        //$message->user_id = $request->userId;
-        //$message->receiver_id =$request->receiverId;
-        //$message->ad_id = $request->advertisementId;
-      //  $message->body = $request->body
-     //   $message->save();
-                Message::create([
+   
+        Message::create([
             'user_id' => $request->userId,
             'receiver_id' => $request->receiverId,
             'ad_id' => $request->advertisementId,
             'body' => $request->body,
         ]);
        
-
     }
+
+
 
     public function MessageView(){
         return view('backend..advertisement.content.message.message_view');
     }
+
+
 
 
     public function ChatWithUser(){
@@ -51,28 +47,18 @@ class MessageController extends Controller
                 return $conversation->sender; // the reciever method here came from message model
         })->unique();
 
-            //count how many unread message each user from this authenticated user
-        $unread=[];
-        foreach($users as $row){
-            $unread[] = Message::where('user_id', $row->id)
-            ->where('receiver_id', auth::id())
-            ->where('read_at', null)
-            ->count();
-            }
-
-        return response()->json(['users'=>$users, 'unread'=>$unread]);
+        return $users;
 
      }
 
      public function ShowMessage(Request $request, $id){
-
+            //i use "with" here in able to use this in vuejs
         $message = Message::with('user','ads')
         ->where('receiver_id', auth::id())
         ->where('user_id', $id)
         ->orwhere('user_id', auth::id())
         ->where('receiver_id', $id)
         ->get();
-        //dd($message);
         return $message;
 
      }
@@ -86,6 +72,7 @@ class MessageController extends Controller
         ]);
         return $message->load('user');// we need to add user from model. in able to read the user attributes
      }
+
 
     public function SetAsReadMessage($id){
                 $today = Carbon::now();

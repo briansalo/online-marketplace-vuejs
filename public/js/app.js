@@ -2358,6 +2358,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
@@ -2381,8 +2383,7 @@ __webpack_require__.r(__webpack_exports__);
           result = this.messages[i].user_id;
           break;
         }
-      } //return response()->json(['result'=>result, 'unread'=>"unread"]);
-
+      }
 
       return result;
     }
@@ -2392,14 +2393,12 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     axios.get('/message/chat_with_user').then(function (response) {
-      _this.users = response.data.users;
+      _this.users = response.data;
     }); //1000 means every 1 seconds. every 1 second the showmessage method will load.
 
     setInterval(function () {
       if (_this.selectedUserId != '') {
         _this.showMessage(_this.selectedUserId);
-
-        console.log(_this.chatuser);
       }
     }, 1000);
   },
