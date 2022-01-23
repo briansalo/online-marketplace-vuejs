@@ -1,5 +1,56 @@
 <template>
+
 <div class="row">
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="exampleModalLabel">Report User</h5>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal" @click.prevent="successMessage=false" aria-label="Close" ></button>
+	      </div>
+	      <div class="modal-body">
+
+		        <div class="form-group">
+		        	<label>Select reason</label>
+		        	<select class="form-control" v-model="selectedReason" name="reason">
+		        		<option value="fraud">Fraud</option>
+		        		<option value="Scammer">Scammer</option>
+		        		<option value="Abusive">Abusive</option>
+		        		<option value="Other">Other</option>
+		        	</select>
+		        </div>
+
+		        <div class="form-group">
+		        	<label>Your Message</label>
+		        	<textarea name="message" v-model="messageReport" class="form-control"></textarea>
+                   
+		        </div>
+            
+                <p v-if="successMessage" style="color: green">Your message successfully send!!!
+                    <br>
+                    We will send you an update regarding this through your email 
+                </p>
+                
+                
+	      </div><!--modal-body-->
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @click.prevent="successMessage=false">Close</button>
+	        <button type="button" class="btn btn-info text-white" @click.prevent="reportUser()">Send</button>
+	      </div>
+    
+    </div><!--modal content-->
+  </div>
+</div>
+
+
+
+
+
+
     <div class="col-md-3">
         
          <table class="table table-hover">
@@ -11,7 +62,9 @@
             <tbody>
                 <tr v-for="(user,index) in users" :key="index">
                     <td href="" @click.prevent="showMessage(user.id)">
-                        {{user.name}}
+                       <img :src="'/storage/'+ (user.avatar).substring(7)" class="rounded-circle" width="30">
+                       {{user.name}}
+
                     </td>
                 </tr>
             </tbody>
@@ -20,21 +73,34 @@
     </div>
     <div class="col-md-9">
         <div class="card">
-            <div class="card-header text-center">
-                <div v-for="(user,index) in users" :key="index">
-                    <!--if user has profile pic-->
-                    <span v-if="user.id == chatuser && user.avatar ">
-                        <img :src="'/storage/'+ (user.avatar).substring(7)" width="60">{{user.name}}
-                    </span>
-                    <!--else-->
-                    <span v-if="user.id == chatuser && !user.avatar ">
-                        <i class="fas fa-user-circle fa-lg"></i>{{user.name}}
-                    </span>
+            <div class="card-header ">
+                
+                <div class="row" >
+                    <div class="col-md-5">
+                    </div>
+                    <div class="col-md-7" >
+                        <div v-for="(user,index) in users" :key="index">
+                            <span v-if="user.id == chatuser">
+                                <a :href="'/user/user/profile/'+user.id" target="_blank">
+                                <img :src="'/storage/'+ (user.avatar).substring(7)" class="rounded-circle" width="30">
+                                    {{user.name}}
+                                </a>    
+                                <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                 style="float: right">Report this user</button> 
+                            </span>
+                        </div>
+                    </div>
+                    <div>
+                   
+                    </div>
                 </div>
+
+    
+
             </div>
             <div class="card-body chat-msg" v-chat-scroll>
                 <ul class="chat" v-for="(message,index) in messages" :key="index">
-                                                        <!--if this chatbelongtoauth is false-->
+                                              <!--if this chatbelongtoauth is false-->
                     <li class="sender clearfix" v-if="!message.chatBelongToAuth"><!--came from message model-->
                        
                         <div class="chat-body2 clearfix">
@@ -119,6 +185,7 @@
 
 import moment from 'moment';
 
+
 export default{
     data(){
         return{
@@ -128,6 +195,9 @@ export default{
             selectedUserId:'',
             body:'',
             moment:moment,
+            messageReport:'',
+            selectedReason:'',
+            successMessage: false,
 
         }
     },//end data
@@ -155,6 +225,7 @@ export default{
             setInterval(() => {
                 if(this.selectedUserId != ''){
                     this.showMessage(this.selectedUserId)
+                    
                 }
             }, 1000);
 
@@ -177,6 +248,17 @@ export default{
               this.body=''
             })
         },
+        reportUser(){
+            axios.post('/report/report/user',{
+                messageReport:this.messageReport,
+                selectedReason:this.selectedReason,
+                reportUserId:this.chatuser
+            }).then((response)=>{
+                this.successMessage=true
+                this.messageReport=''
+                this.selectedReason=''
+            })    
+        }
         
     }//methods
 }

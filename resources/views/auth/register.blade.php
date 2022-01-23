@@ -7,9 +7,10 @@
             <div class="card">
                 <div class="text-center mt-2"><h4>Register</h4></div>
                 <div class="card-body">
-                <form action="{{ route('register')}}" method="post">@csrf
+                <form action="{{ route('register')}}" method="post" enctype="multipart/form-data">
+                    @csrf
                         <div class="form-group row mb-2">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">
+                            <label for="name" class="col-md-4 col-form-label text-end">
                                 Name
                             </label>
                             <div class="col-md-6">
@@ -26,7 +27,7 @@
                         </div>
 
                         <div class="form-group row mb-2">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">
+                            <label for="email" class="col-md-4 col-form-label text-end">
                                 Email
                             </label>
                             <div class="col-md-6">
@@ -41,8 +42,9 @@
                                 @enderror
                             </div>
                         </div>
+
                         <div class="form-group row mb-2">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">
+                            <label for="password" class="col-md-4 col-form-label text-end">
                                 Password
                             </label>
                             <div class="col-md-6">
@@ -58,7 +60,7 @@
                             </div>
                         </div>
                         <div class="form-group row mb-2">
-                            <label for="password_confirmation" class="col-md-4 col-form-label text-md-right">
+                            <label for="password_confirmation" class="col-md-4 col-form-label text-end">
                                 Confirm password
                             </label>
                             <div class="col-md-6">
@@ -68,14 +70,31 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="form-group row mb-0">
-                         
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-danger">Register</button>
-                                
+
+                        <div class="form-group row mb-2">
+                            <label for="email" class="col-md-4 col-form-label text-end">
+                                Avatar
+                            </label>
+                            <div class="col-md-6">
+                                <input type="file" name="avatar" class="form-control @error('avatar') is-invalid @enderror">
+                                @error('avatar')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>
+                                        {{$message}}
+                                    </strong>
+
+                                </span>
+                                @enderror
                             </div>
                         </div>
 
+                        <div class="form-group row mb-0">
+                         
+                            <div class="col-md-6 offset-md-4">
+                                <button type="submit" class="btn btn-info text-white">Register</button>
+                                
+                            </div>
+                        </div>
 
                     </form>
                     
@@ -84,5 +103,6 @@
         </div>
     </div>
 </div>
+
 @endsection
 

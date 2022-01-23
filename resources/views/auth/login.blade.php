@@ -2,11 +2,13 @@
 @section('content')
 
     <div class="container">
+
         <div class="row justify-content-center mt-5">
-            <div class="col-md-8">
+            <div class="col-md-5">
                 <div class="card">
                     <div class="text-center mt-2">
-                        <h4>Login</h4>
+                        <h4>Login to your account</h4>
+                        <hr style="margin-right: 20%; margin-left: 20%; border:2px solid blue">
                         @if(session('status'))
                         <div class="alert alert-success">
                             {{session('status')}}
@@ -18,12 +20,14 @@
                         <form action="{{route('login')}}" method="post">@csrf
 
 
-                            <div class="form-group row mb-2">
-                                <label for="email" class="col-md-4 col-form-label text-md-right">
+                            <div class="row d-flex justify-content-center mb-2">
+                                
+                                <div class="col-md-8">
                                     Email
-                                </label>
-                                <div class="col-md-6">
+                      <!--the cookie here is for remember me-->
+                      <!--the cookie here is set on vendor/laravel/fortify/src/http/controllers/autehnticated-session-controller -->
                                     <input type="email" name="email"
+                                    @if(Cookie::has('email')) value="{{Cookie::get('email')}}" @endif
                                         class="form-control @error('email') is-invalid @enderror">
                                     @error('email')
                                         <span class="invalid-feedback" role="alert">
@@ -35,12 +39,12 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label for="password" class="col-md-4 col-form-label text-md-right">
-                                    Password
-                                </label>
-                                <div class="col-md-6">
+
+                            <div class="row d-flex justify-content-center">
+                                <div class="col-md-8">
+                                     Password
                                     <input type="password" name="password"
+                                    @if(Cookie::has('password')) value="{{Cookie::get('password')}}" @endif
                                         class="form-control @error('password') is-invalid @enderror">
                                     @error('password')
                                         <span class="invalid-feedback" role="alert">
@@ -52,33 +56,35 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="form-group row">
+                            <div class="row d-flex justify-content-center">
 
-                                <div class="col-md-6 offset-md-4">
+                                <div class="col-md-8">
+                                  <p><a href="{{route('password.request')}}">Forgot your password?</a></p>
                                     <div class="form-check">
                                         <input type="checkbox" class="form-check-input" name="remember" id="remember"
+                                        @if(Cookie::has('email')) checked @endif
                                             {{ old('remember') ? 'checked' : '' }}>
-                                        <label class="form-check-label" for="label">Remember me</label>
-                                    <p><a href="{{route('password.request')}}">Forgotten a password?</a></p>
+                                        <label class="form-check-label" for="label">Keep me signed in</label>
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group row mb-0">
+                            <div class="row d-flex justify-content-center">
                                 
-                                <div class="col-md-6 offset-md-4">
-                                    <button type="submit" class="btn btn-success">Login</button>
+                                <div class="d-grid gap-2 col-8">
+                                    <button type="submit" class="btn btn-info text-white">Login</button>
 
                                 </div>
-                            </div>
-                            
-                            
-                           
-
+                            </div>                            
 
                         </form>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </div><!---->
+    <script type="text/javascript">
+    $(window).on('load', function() {
+        $('#exampleModal').modal('show');
+    });
+</script>
 @endsection

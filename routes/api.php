@@ -25,10 +25,7 @@ Route::get('/category', [ApiCategoryController::class, 'getCategory']);
 Route::get('/subcategory', [ApiCategoryController::class, 'getSubCategory']);
 Route::get('/childcategory', [ApiCategoryController::class, 'getChildCategory']);
 
-//for update/edit form in ads category
-Route::get('/all/category', [ApiCategoryController::class, 'getAllCategory']);
-Route::get('/all/subcategory', [ApiCategoryController::class, 'getAllSubCategory']);
-Route::get('/all/childcategory', [ApiCategoryController::class, 'getAllChildCategory']);
+
 
 //address
 Route::get('/province', [ApiAddressController::class, 'getProvince']);

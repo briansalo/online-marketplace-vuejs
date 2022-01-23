@@ -33,7 +33,7 @@ class CreateAdvertisementsTable extends Migration
             $table->integer('city_id')->nullable();            
             $table->integer('barangay_id')->nullable();
             $table->string('phone_number');
-            $table->integer('published')->default(1);
+            $table->integer('published')->default(1)->comment('1=pending,0=published');
             $table->string('link')->nullable();
             $table->timestamps();
         });

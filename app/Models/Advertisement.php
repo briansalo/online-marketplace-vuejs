@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use App\Models\Category;
 use App\Models\Childcategory;
 use App\Models\Subcategory;
 
@@ -12,6 +13,8 @@ use App\Models\Province;
 use App\Models\City;
 use App\Models\Barangay;
 use App\Models\User;
+
+use DB;
 
 use Cohensive\OEmbed\Facades\OEmbed;
 
@@ -22,6 +25,10 @@ class Advertisement extends Model
 
     public function user(){
         return $this->belongsTo(User::class);
+    }
+
+    public function category(){
+        return $this->hasOne(Category::class,'id','category_id'); 
     }
 
     public function childcategory(){
@@ -58,4 +65,20 @@ class Advertisement extends Model
         }
 
     }
+
+    //save ads relation
+    public function userads(){
+        return $this->belongsToMany(User::class);
+    }
+
+    //check if user alreads save the ads
+    public function didUserSavedAd(){
+        return DB::table('advertisement_user')
+                ->where('user_id', auth()->user()->id)
+                ->where('advertisement_id', $this->id)
+                ->first();
+    }
+
+
+
 }

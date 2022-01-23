@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
 
+
+
 class CreateNewUser implements CreatesNewUsers
 {
     use PasswordValidationRules;
@@ -30,12 +32,16 @@ class CreateNewUser implements CreatesNewUsers
                 Rule::unique(User::class),
             ],
             'password' => $this->passwordRules(),
+            'avatar' => 'required|mimes:jpg,bmp,png',
         ])->validate();
 
+    $avatar = $input['avatar']->store('public/avatar');
         return User::create([
             'name' => $input['name'],
             'email' => $input['email'],
             'password' => Hash::make($input['password']),
+            'avatar' => $avatar,
+
         ]);
     }
 }

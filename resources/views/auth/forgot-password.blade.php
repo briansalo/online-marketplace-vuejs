@@ -18,7 +18,7 @@
 
                             <div class="form-group row">
                                 <label for="email" class="col-md-4 col-form-label text-end">
-                                    Email:
+                                    Email
                                 </label>
                                 <div class="col-md-6 mb-2">
                                     <input type="email" name="email"
@@ -35,7 +35,7 @@
                             </div>
                              <div class="row">
                                 <div class="col-md-6 offset-md-4">
-                                    <button type="submit" class="btn btn-danger">Send password reset link</button>
+                                    <button type="submit" class="btn btn-info text-white">Send password reset link</button>
                                 </div>
                             <div class="row">
                       </form>

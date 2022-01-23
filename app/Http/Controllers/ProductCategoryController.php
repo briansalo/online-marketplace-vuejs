@@ -9,16 +9,19 @@ use App\Models\Subcategory;
 use App\Models\Category;
 use App\Models\Advertisement;
 
+use Tabuna\Breadcrumbs\Trail;
+
 class ProductCategoryController extends Controller
 {
 
     public function findBaseOnCategory(Request $request, Category $categorySlug){
 
         if($request->min_price == null  && $request->max_price == null){
-               $advertisementWithoutFilterPrice = $categorySlug->ads;//the ads methods from subcategory model          
+               $advertisementWithoutFilterPrice = $categorySlug->ads->where('published',1);//the ads methods from category model          
         }else{
             $advertisementBaseFilterPrice = Advertisement::where('category_id',$categorySlug->id)
             ->whereBetween('price',[$request->min_price, $request->max_price])
+            ->where('published',1)
             ->get();
 
         }
@@ -27,7 +30,7 @@ class ProductCategoryController extends Controller
 
         $filterCategory = $categorySlug->ads->unique('subcategory_id');
 
-       return view('products.category',compact('advertisement','filterCategory'));
+       return view('backend.products.category',compact('advertisement','filterCategory'));
 
     }
 
@@ -36,7 +39,7 @@ class ProductCategoryController extends Controller
     public function findBaseOnSubCategory(Request $request,$categorySlug,Subcategory $subcategorySlug){//meaning of this is $subcategorySlug variable is connected to Subcategory model
          
         if($request->min_price == null  && $request->max_price == null){
-             $advertisementWithoutFilterPrice = $subcategorySlug->ads;//the ads methods from subcategory model
+             $advertisementWithoutFilterPrice = $subcategorySlug->ads->where('published',1);//the ads methods from subcategory model
         }else{
             $advertisementBaseFilterPrice = Advertisement::where('subcategory_id',$subcategorySlug->id)
             ->whereBetween('price',[$request->min_price, $request->max_price])
@@ -47,7 +50,7 @@ class ProductCategoryController extends Controller
 
         $filterChildCategory = $subcategorySlug->ads->unique('childcategory_id');
 
-        return view('products.subcategory',compact('advertisement','filterChildCategory'));
+        return view('backend.products.subcategory',compact('advertisement','filterChildCategory'));
     }   
 
 
@@ -57,7 +60,7 @@ class ProductCategoryController extends Controller
     (Request $request,$categorySlug,Subcategory $subcategorySlug,Childcategory $childcategorySlug){
 
         if($request->min_price == null  && $request->max_price == null){
-             $advertisementWithoutFilterPrice = $childcategorySlug->ads;//the ads methods from subcategory model
+             $advertisementWithoutFilterPrice = $childcategorySlug->ads->where('published',1);//the ads methods from childcategory model
         }else{
             $advertisementBaseFilterPrice = Advertisement::where('childcategory_id',$childcategorySlug->id)
             ->whereBetween('price',[$request->min_price, $request->max_price])
@@ -68,7 +71,7 @@ class ProductCategoryController extends Controller
 
         $filterChildCategory = $subcategorySlug->ads->unique('childcategory_id');
 
-        return view('products.childcategory',compact('advertisement','filterChildCategory'));
+        return view('backend.products.childcategory',compact('advertisement','filterChildCategory'));
     }
 
 
@@ -77,8 +80,8 @@ class ProductCategoryController extends Controller
     public function ShowProductInfo($id, $slug){
       
         $advertisement = Advertisement::where('id', $id)->where('slug', $slug)->first();
-        //dd($advertisement->user_id);
-        return view('products.product_info',compact('advertisement'));
+        
+        return view('backend.products.product_info',compact('advertisement'));
 
 
     }

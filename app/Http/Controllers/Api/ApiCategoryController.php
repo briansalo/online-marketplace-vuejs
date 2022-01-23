@@ -32,23 +32,7 @@ class ApiCategoryController extends Controller
     }
 
 
-    public function getAllCategory(Request $request){
-        $updatecategory =Category::all();
-        return response()->json($updatecategory);
 
-    }
-
-    public function getAllSubcategory(Request $request){
-        $updatesubcategory =Subcategory::all();
-        return response()->json($updatesubcategory);
-
-    }
-
-    public function getAllChildcategory(Request $request){
-        $updatechildcategory =Childcategory::all();
-        return response()->json($updatechildcategory);
-
-    }
 
 
 }

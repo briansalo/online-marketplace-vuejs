@@ -5,8 +5,8 @@
 <button type="button" v-if="viewConversation" class="btn btn-primary far fa-envelope" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
   Send Message
 </button>
-<a :href="'/message/view'" type="button" v-else class="btn btn-primary">
-  view Message
+<a :href="'/message/view'" type="button" v-else class="btn btn-success">
+  View Message
 </a>
 
 <!-- Modal -->
@@ -20,7 +20,7 @@
 
       <div class="modal-body">
         <textarea v-model="body" class="form-control" placeholder="please write your message"></textarea>
-        <p v-if="successMessage" style="color: green">Your Message has beens sent. </p>
+        <p v-if="successMessage" style="color: green">Your Message Successfully send. </p>
       </div>
 
       <div class="modal-footer">

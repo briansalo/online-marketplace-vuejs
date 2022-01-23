@@ -27,19 +27,6 @@
                                     @enderror
                                 </div>
 
-                                <div class="form-group">
-                                    <label for="image">Image</label>
-                                    <input type="file" class="form-control @error('image') is-invalid @enderror"
-                                        name="image">
-                                    @error('image')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>
-                                                {{ $message }}
-                                            </strong>
-
-                                        </span>
-                                    @enderror
-                                </div>
                                 
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-primary">Save</button>

@@ -12,7 +12,7 @@ class AuthController extends Controller
    public function log_out(){
 
         Auth::logout();
-        return redirect('/login');
+        return redirect('/');
     }
 
 }

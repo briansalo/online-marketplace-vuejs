@@ -1,10 +1,9 @@
-@extends('backend.advertisement.advertisement_index')
-@section('advertisement_content')
-
+@extends('backend.dashboard.dashboard')
+@section('dashboard_content')
 
                 <form action="{{ route('ads.update',$data->id)}}" method="post" enctype="multipart/form-data">@csrf
                     <div class="card">
-                        <div class="card-header text-white" style="background-color: red">
+                        <div class="card-header">
                             Update Ads
                         </div>
                         <div class="card-body">
@@ -56,10 +55,7 @@
                                     <option value="new"{{($data->product_condition=='new')?'selected':''}}>New</option>
                                 </select>
                             </div>
-                            <div class="form-group">
-                                <label for="location">Listing Location</label>
-                                <input type="text" value="{{$data->listing_location}}"class="form-control" name="listing_location">
-                            </div>
+
                             <label for="file" class="mt-2"><b>Choose address</b></label>
                             <div class="row form-inline form-group mt-1">
 
@@ -80,7 +76,7 @@
                                 <input type="text" value="{{$data->link}}"class="form-control" name="link">
                             </div>
                             <div class="form-group mt-2">
-                                <button class="btn btn-danger float-right" type="submit">Publish</button>
+                                <button class="btn btn-info text-white float-right" type="submit">Update</button>
                             </div>
 
                         </div>

@@ -23,7 +23,7 @@ class AdvertisementController extends Controller
 {
 
     public function __construct(){
-        $this->middleware(['auth']); //only auth user and verified user can access this controller
+        $this->middleware(['auth','verified']); //only auth user and verified user can access this controller
     }
     /**
      * Display a listing of the resource.
@@ -32,8 +32,8 @@ class AdvertisementController extends Controller
      */
     public function index()
     {
-        $alldata = Advertisement::where('user_id', auth()->user()->id)->get();
-        return view('backend.advertisement.content.advertisement_show',compact('alldata'));
+        $alldata = Advertisement::where('user_id', auth()->user()->id)->where('published', '1')->get();
+        return view('backend.dashboard.content.ads.advertisement_index',compact('alldata'));
     }
 
     /**
@@ -52,7 +52,7 @@ class AdvertisementController extends Controller
         $data['citys'] = City::all();
         $data['barangays'] = Barangay::all();
 
-        return view('backend.advertisement.content.advertisement_add', $data);
+        return view('backend.dashboard.content.ads.advertisement_add', $data);
     }
 
     /**
@@ -74,12 +74,12 @@ class AdvertisementController extends Controller
         $data['second_image'] = $secondImage;
         $data['user_id']=auth()->user()->id;
         $data['slug'] = Str::slug($request->name);
-
-    //dd($data);        
+        $data['published'] = '0';
+                
         //if you use this code make sure "$data=$request->all()"" is at the top of array. and the name of your input name in form is same of the name of column in the database table
         Advertisement::create($data); 
 
-        return "created";
+        return back();
     }
 
     /**
@@ -103,7 +103,7 @@ class AdvertisementController extends Controller
     {
         $data=Advertisement::find($id);
         if(auth()->user()->id == $data->user_id){
-             return view('backend.advertisement.content.advertisement_edit',compact('data'));
+             return view('backend.dashboard.content.ads.advertisement_edit',compact('data'));
         }else{
             abort(404);
         }
@@ -149,5 +149,12 @@ class AdvertisementController extends Controller
     {
         Category::find($id)->delete();
         return redirect()->route('category.index')->with('message','Category deleted successfully');
+    }
+
+
+
+    public function Pending(){
+        $advertisements = Advertisement::where('user_id',auth()->user()->id)->where('published', 0)->get();
+        return view('backend.dashboard.content.pending_ads.pending_ads_index',compact('advertisements'));
     }
 }

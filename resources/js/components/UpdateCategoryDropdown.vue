@@ -50,19 +50,23 @@ props:['categoryId','subcategoryId','childcategoryId'],
         this.getAllChildcategories();
     },
     methods:{
-        //the response data from /api/all/category  will be push in categories data/variable
+        //the response data from /api/category  will be push in categories data/variable
         getAllCategories(){
-            axios.get('/api/all/category').then((response)=>{
+            axios.get('/api/category').then((response)=>{
                 this.categories = response.data
             })
         },
         getAllSubcategories(){
-            axios.get('/api/all/subcategory').then((response)=>{
+            axios.get('/api/subcategory',{params:{
+                category_id:this.category
+            }}).then((response)=>{
                 this.subcategories = response.data
             })
         },
         getAllChildcategories(){
-            axios.get('/api/all/childcategory').then((response)=>{
+            axios.get('/api/childcategory',{params:{
+                subcategory_id:this.subcategory
+            }}).then((response)=>{
                 this.childcategories = response.data
             })
         },

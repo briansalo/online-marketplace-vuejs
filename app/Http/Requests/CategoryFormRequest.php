@@ -26,7 +26,7 @@ class CategoryFormRequest extends FormRequest
     {
         return [
             'name'=>'required|min:2|max:40|unique:categories',
-            'image'=>'required|mimes:png,jpg,jpeg'
+            
         ];
     }
 }

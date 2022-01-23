@@ -25,6 +25,8 @@ Vue.component('update-address-dropdown', require('./components/UpdateAddressDrop
 Vue.component('message', require('./components/Message.vue').default)
 Vue.component('conversation', require('./components/Conversation.vue').default)
 
+Vue.component('save_ad', require('./components/SaveAd.vue').default)
+
 const app = new Vue({
 	el: '#app',
 	//component:{App}

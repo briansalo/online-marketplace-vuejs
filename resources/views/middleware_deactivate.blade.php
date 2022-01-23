@@ -2,16 +2,16 @@
 @section('content')
 
 <div class="container">
-	<div class="row">
+
 		<div class="card">
 			<div class="card-header">
-				Home
+					<p >Your account was locked by the admin!!!</p> <br> 
+					To settle your account you may contact on admin@gmail.com
+				
 			</div>
-			<div class="card-body">
-				Hello, {{ auth()->user()->name}}
-			</div>
+
 		</div>	
-	</div>
+
 </div>
 
 

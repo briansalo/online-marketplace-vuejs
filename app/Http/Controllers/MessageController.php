@@ -26,7 +26,7 @@ class MessageController extends Controller
 
 
     public function MessageView(){
-        return view('backend..advertisement.content.message.message_view');
+        return view('backend.dashboard.content.message.message_view');
     }
 
 

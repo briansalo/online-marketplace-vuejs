@@ -55,7 +55,7 @@
                         <div class="form-group row mb-0">
                          
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-danger">Create new password</button>
+                                <button type="submit" class="btn btn-info text-white">Create new password</button>
                                 
                             </div>
                         </div>

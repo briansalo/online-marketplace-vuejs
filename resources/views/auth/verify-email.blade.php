@@ -13,7 +13,7 @@
 		</div>
 		<div class="card-body">
 			<form action="{{route('verification.send')}}" method="post">@csrf
-				<button type="submit" class="btn btn-primary">Verify Account</button>
+				<button type="submit" class="btn btn-info text-white">Verify Account</button>
 				
 			</form>
 			

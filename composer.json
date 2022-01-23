@@ -13,7 +13,9 @@
         "laravel/fortify": "^1.8",
         "laravel/framework": "^8.75",
         "laravel/sanctum": "^2.11",
-        "laravel/tinker": "^2.5"
+        "laravel/socialite": "^5.3",
+        "laravel/tinker": "^2.5",
+        "tabuna/breadcrumbs": "^2.4"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

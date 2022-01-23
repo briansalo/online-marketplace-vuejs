@@ -23,6 +23,8 @@ class CreateUsersTable extends Migration
             $table->string('avatar')->nullable();
             $table->string('address')->nullable();
             $table->string('fb_id')->nullable();
+            $table->string('count_penalty')->nullable();
+            $table->integer('status')->default(0)->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

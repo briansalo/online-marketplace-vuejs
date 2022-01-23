@@ -39,10 +39,9 @@ class CategoryController extends Controller
      */
     public function store(CategoryFormRequest $request)
     {
-        $image = $request->file('image')->store('public/category');
+
         Category::create([
             'name'=>$name= $request->name,
-            'image'=> $image,
             'slug'=>Str::slug($name)
         ]);
         return redirect()->route('category.index')->with('message','Category created Successfully');

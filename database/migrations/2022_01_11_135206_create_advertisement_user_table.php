@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSaveAdsTable extends Migration
+class CreateAdvertisementUserTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,10 @@ class CreateSaveAdsTable extends Migration
      */
     public function up()
     {
-        Schema::create('save_ads', function (Blueprint $table) {
+        Schema::create('advertisement_user', function (Blueprint $table) {
             $table->id();
+            $table->integer('user_id');
+            $table->integer('advertisement_id');
             $table->timestamps();
         });
     }
@@ -26,6 +28,6 @@ class CreateSaveAdsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('save_ads');
+        Schema::dropIfExists('advertisement_user');
     }
 }
